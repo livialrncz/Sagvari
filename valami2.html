@@ -1,0 +1,85 @@
+<html><head></head><body>
+    <h1>Pithagoraszi számhármas-generátor (nem lopott)</h1>
+    <div id="x0">
+        <button onclick="
+            document.getElementById('xt').value--
+            f(document.getElementById('xt').value)
+        ">-</button>
+        <input type="range" id="xt" value="1406" max="1787" onmousemove="f(this.value)" onchange="f(this.value)">
+            <button onclick="
+                document.getElementById('xt').value++
+                f(document.getElementById('xt').value)
+            ">+</button>
+            <hr>
+            <div class="x6">
+                <button id="x345" onclick="
+                    document.getElementById('xt').value=1406
+                    f(document.getElementById('xt').value)
+                " style="display: inline-block;">3 - 4 - 5</button>
+            </div>
+        <div class="p">a = <span id="a">4059</span></div>
+        <div class="p">b = <span id="b">4060</span></div>
+        <div class="p">c = <span id="c">5741</span></div>
+        <div class="p">a/b<br><span class="q" id="ab">0.9997536945812808</span></div>
+    </div>
+
+<script>
+    function lnko(a, b) {
+        if (a < b) [a, b] = [b, a]
+        return a > b ? lnko(a - b, b) : a
+    }
+    l = new Set(), lab = []
+    for (a = 3; a < 10000; a++) for (b = a; b < 10000; b++) {
+        c = Math.sqrt(a ** 2 + b ** 2)
+        if (c == Math.floor(c)) {
+            o = lnko(a, b), m = a / b
+            if (!l.has(m)) l.add(m), lab.push([a / o, b / o])
+        }
+    }
+    lab.sort( (a, b) => (a[0] / a[1]) - (b[0] / b[1]) )
+    document.getElementById("xt").setAttribute("max", lab.length-1)
+    function f(i) {
+        sobj = document.getElementById("x345").style
+        if (i==1406) sobj.display="None"; else sobj.display="inline-block";
+        [a, b] = lab[i], [ax, bx, cx, abx] = Array([
+            ["a", a], ["b", b], ["c", Math.sqrt( a ** 2 + b ** 2 )], ["ab", a / b]
+        ].forEach( v => document.getElementById(v[0]).innerHTML = v[1]))
+    }
+    f(1406)
+</script>
+<style>
+    body {
+        text-align: center;
+    }
+    #xt {
+        width: 800px;
+        cursor: pointer;
+    }
+    button {
+        cursor:pointer;
+    }
+    body {
+        background-color: rgb(196, 246, 246)96, 246, 246);
+    }
+    .p, h1 {
+        font-size: 30px;
+        text-shadow: 1px 1px 4px gray;
+        color: rgb(148, 216, 255);
+        background-color: rosybrown;
+        border-radius: 5px;
+        box-shadow: 1px 1px 4px inset black;
+        margin: 10px;
+    }
+    span {
+        width: 77px;
+        display: inline-block;
+        text-align: right;
+    }
+    .x6 {
+        height: 40px;
+    }
+    .q {
+        width: 600px;
+        text-align: center;
+    }
+</style></body></html>
