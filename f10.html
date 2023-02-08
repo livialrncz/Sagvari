@@ -1,0 +1,20 @@
+<input type="number" placeholder="a" onchange="a=Number(this.value)"><br>
+<input type="number" placeholder="b" onchange="b=Number(this.value)"><br>
+<input type="number" placeholder="c" onchange="c=Number(this.value)"><br>
+<button onclick="f()">Számol</button>
+<div id="e"></div>
+<script>
+function f() {
+    for (x=-100; x<100; x++) {
+        y = (c - a * x) / b
+        if (y == Math.floor(y)) {
+            document.getElementById("e").innerHTML += "(" + x + ";" + y +")<br>"
+        }
+    }
+}
+</script>
+<style>
+    body {
+        text-align: center;
+    }
+</style>
